@@ -15,18 +15,37 @@ from vcr.serializers import yamlserializer
 
 
 class CleanYAMLSerializer:
+
+    def __init__(self):
+        self.cleaners = []
+
     @staticmethod
     def serialize(cassette: dict):
         for interaction in cassette['interactions']:
-            pass
-            # TODO: Add your cleaner functions here.
-            # TODO: Add a link to our cleaner function repo here.
+            for cleaner in self.cleaners:
+                cleaner(interaction)
         return yamlserializer.serialize(cassette)
 
     @staticmethod
     def deserialize(cassette: str):
         return yamlserializer.deserialize(cassette)
 
+    def register_cleaner(function):
+        self.cleaners.append(function)
+
+
+def cleaner(uri):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            return
+        return wrapper
+    return decorator
+
+
+@cleaner(uri="ba")
+def custum_foo(interaction):
+   pass
 
 # Can not generlize as a fixture due to AppConnector dependency
 #@pytest.fixture
@@ -62,6 +81,12 @@ class CleanYAMLSerializer:
 #        filter_headers=[('Authorization', 'Bearer FAKE_TOKEN')],
 #        match_on=['uri', 'method'],
 #    )
+####### Pseudo-code
+#    serializer = CleanYAMLSerializer()
+#    serializer.register_cleaner(imported_fun1)
+#    serializer.register_cleaner(builtin_fun2)
+#    my_vcr.register_serializer("cleanyaml", serializer)
+######
 #    my_vcr.register_serializer("cleanyaml", CleanYAMLSerializer)
 #
 #    with my_vcr.use_cassette(f'{request.function.__name__}.yaml',
