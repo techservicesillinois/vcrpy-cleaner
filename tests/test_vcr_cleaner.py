@@ -26,7 +26,7 @@ def clean_robots():
 
 
 # TODO: Test with serializer
-@cleaner(uri=f'{CASSETTE_ENDPOINT}/robots.txt')
+# @cleaner(uri=f'{CASSETTE_ENDPOINT}/robots.txt')
 def test_with_vcr(cassette):
 
     # Assemble
@@ -34,4 +34,5 @@ def test_with_vcr(cassette):
     # Act
     response = requests.get(f'{CASSETTE_ENDPOINT}/robots.txt')
     assert response.status_code == 200
+    # assert 0 == 1
     # TODO: Open and examine the generated YAML in the cassette.

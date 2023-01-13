@@ -20,8 +20,7 @@ class CleanYAMLSerializer:
     def __init__(self):
         self.cleaners = []
 
-    @staticmethod
-    def serialize(cassette: dict):
+    def serialize(self, cassette: dict):
         for interaction in cassette['interactions']:
             for cleaner in self.cleaners:
                 cleaner(interaction)

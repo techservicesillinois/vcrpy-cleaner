@@ -1,0 +1,45 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.2
+    method: GET
+    uri: https://cybersecurity.illinois.edu/robots.txt
+  response:
+    body:
+      string: 'User-agent: *
+
+        Allow: /
+
+        Sitemap: https://cybersecurity.illinois.edu/sitemap.xml'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Fri, 13 Jan 2023 21:29:49 GMT
+      Expires:
+      - Fri, 13 Jan 2023 21:29:49 GMT
+      Server:
+      - nginx/1.23.1
+      Set-Cookie:
+      - AWSALB=fLEB8QogOIHFFZNLwFPTewkXe5L3jU/i2meY2UviGaCs/eL64vIrg02CCZBtlDTuAh3fS7DQhvfYo31/BvsapNksz6HTjI8Q3VpxSKefZBfZTcHgZWa1aiiAttmw;
+        Expires=Fri, 20 Jan 2023 21:29:49 GMT; Path=/
+      - AWSALBCORS=fLEB8QogOIHFFZNLwFPTewkXe5L3jU/i2meY2UviGaCs/eL64vIrg02CCZBtlDTuAh3fS7DQhvfYo31/BvsapNksz6HTjI8Q3VpxSKefZBfZTcHgZWa1aiiAttmw;
+        Expires=Fri, 20 Jan 2023 21:29:49 GMT; Path=/; SameSite=None; Secure
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
+version: 1
