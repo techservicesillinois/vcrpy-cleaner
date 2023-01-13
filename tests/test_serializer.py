@@ -4,6 +4,7 @@ import jwt
 import gzip
 import pytest
 
+SALT = 'salty'
 
 def token_response(raw_token: str):
     '''Helper function to build VCR response dictionary'''
@@ -14,7 +15,7 @@ def token_response(raw_token: str):
             },
             'body': {
                 'string': gzip.compress(bytes(
-                jwt.encode(raw_token, 'salty', algorithm='HS256') , "ascii"))
+                jwt.encode(raw_token, SALT, algorithm='HS256') , "ascii"))
             }
         }
     }
@@ -26,7 +27,7 @@ def clean_token(interaction: dict):
     #    return
 
     token = jwt.encode(
-        {'exp': datetime.datetime(2049, 6, 25)}, 'arenofun', algorithm='HS256')
+        {'exp': datetime.datetime(2049, 6, 25)}, SALT, algorithm='HS256')
     response = interaction['response']
     if 'Content-Encoding' in response['headers'].keys() and \
             response['headers']['Content-Encoding'] == ['gzip']:
