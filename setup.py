@@ -52,6 +52,7 @@ setup(
     extras_require={
         'test': [
             'pytest',
+            'pyjwt',
         ],
     },
     project_urls={
