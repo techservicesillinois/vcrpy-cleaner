@@ -3,7 +3,7 @@
 class CleanYAMLSerializer:
     '''VCR.py YAML serializer that applies data cleaners as it serializes.
     
-    See src/contrib for included cleaner functions.
+    See src/cleaners for included cleaner functions.
     '''
     def __init__(self):
         self._cleaners = []
