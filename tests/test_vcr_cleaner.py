@@ -18,7 +18,10 @@ from cleaners.jwt_token import clean_token
 
 CASSETTE_ENDPOINT = 'https://cybersecurity.illinois.edu'
 
+# TODO: Add unit tests. 
 
+# TODO: Think about how to get rid of need 
+# to export VCR_RECORD and deleting the YAML
 def test_with_vcr(cassette):
 
     # Assemble
