@@ -53,6 +53,7 @@ setup(
         'test': [
             'pytest',
             'pyjwt',
+            'requests',
         ],
     },
     project_urls={
