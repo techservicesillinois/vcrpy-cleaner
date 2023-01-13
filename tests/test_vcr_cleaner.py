@@ -30,15 +30,16 @@ def clean_robots(interaction: dict):
 
 # TODO: Test with serializer
 def test_with_vcr(cassette):
-
     # Assemble
-    def get_ye_robots():
-        return requests.get(f'{CASSETTE_ENDPOINT}/robots.txt')
 
     # Act
-    response = get_ye_robots()
+    response = requests.get(f'{CASSETTE_ENDPOINT}/robots.txt')
 
     # Assert
     assert response.status_code == 200
     # TODO: Open and examine the generated YAML in the cassette.
-    assert 'TRON' in cassette.responses[0]['body']['string']
+    with open(cassette._path, 'r') as cassette_file:
+        cassette_content = cassette_file.read()
+        assert 'User-agent' not in cassette_content
+
+    # assert 'TRON' in cassette.responses[0]['body']['string']
