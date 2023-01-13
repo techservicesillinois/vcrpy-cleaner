@@ -14,7 +14,7 @@ interactions:
     uri: https://cybersecurity.illinois.edu/robots.txt
   response:
     body:
-      string: 'User-agent: *
+      string: 'TRON: *
 
         Allow: /
 
@@ -27,16 +27,16 @@ interactions:
       Content-Type:
       - text/plain; charset=UTF-8
       Date:
-      - Fri, 13 Jan 2023 21:29:49 GMT
+      - Fri, 13 Jan 2023 22:08:37 GMT
       Expires:
-      - Fri, 13 Jan 2023 21:29:49 GMT
+      - Fri, 13 Jan 2023 22:08:37 GMT
       Server:
       - nginx/1.23.1
       Set-Cookie:
-      - AWSALB=fLEB8QogOIHFFZNLwFPTewkXe5L3jU/i2meY2UviGaCs/eL64vIrg02CCZBtlDTuAh3fS7DQhvfYo31/BvsapNksz6HTjI8Q3VpxSKefZBfZTcHgZWa1aiiAttmw;
-        Expires=Fri, 20 Jan 2023 21:29:49 GMT; Path=/
-      - AWSALBCORS=fLEB8QogOIHFFZNLwFPTewkXe5L3jU/i2meY2UviGaCs/eL64vIrg02CCZBtlDTuAh3fS7DQhvfYo31/BvsapNksz6HTjI8Q3VpxSKefZBfZTcHgZWa1aiiAttmw;
-        Expires=Fri, 20 Jan 2023 21:29:49 GMT; Path=/; SameSite=None; Secure
+      - AWSALB=tvodB18ULroWAREHKICjl6+hIQ7YwJ9hhJagB1oTG8tDMalHlywGLaiGy/zvDcoEqlAjzD++14Baufj6ZUqN1yn0ayfVW2QcZzNHNnAaqiUOCb30xpfvNPh3Zewy;
+        Expires=Fri, 20 Jan 2023 22:08:37 GMT; Path=/
+      - AWSALBCORS=tvodB18ULroWAREHKICjl6+hIQ7YwJ9hhJagB1oTG8tDMalHlywGLaiGy/zvDcoEqlAjzD++14Baufj6ZUqN1yn0ayfVW2QcZzNHNnAaqiUOCb30xpfvNPh3Zewy;
+        Expires=Fri, 20 Jan 2023 22:08:37 GMT; Path=/; SameSite=None; Secure
       Transfer-Encoding:
       - chunked
     status:
