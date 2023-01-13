@@ -30,7 +30,7 @@ class CleanYAMLSerializer:
     def deserialize(cassette: str):
         return yamlserializer.deserialize(cassette)
 
-    def register_cleaner(function):
+    def register_cleaner(self, function):
         self.cleaners.append(function)
 
 

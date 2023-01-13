@@ -30,7 +30,11 @@ def clean_robots(interaction: dict):
 
 # TODO: Test with serializer
 def test_with_vcr(cassette):
+
     # Assemble
+    cassette._serializer.register_cleaner(clean_robots)
+
+    # TODO: Add clean_robots to our serializer
 
     # Act
     response = requests.get(f'{CASSETTE_ENDPOINT}/robots.txt')
