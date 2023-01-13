@@ -18,21 +18,27 @@ from cleaners.jwt_token import clean_token
 
 CASSETTE_ENDPOINT = 'https://cybersecurity.illinois.edu'
 
-def clean_robots():
+@cleaner(uri=f'{CASSETTE_ENDPOINT}/robots.txt')
+def clean_robots(interaction: dict):
     '''Trivial cleaner function for testing.
 
     Replaces 'User-agent' in any robots.txt file response.
     '''
+    response = interaction['response']
+    response['body']['string'].replace('User-agent', 'TRON')
 
 
 # TODO: Test with serializer
-# @cleaner(uri=f'{CASSETTE_ENDPOINT}/robots.txt')
 def test_with_vcr(cassette):
 
     # Assemble
+    def get_ye_robots():
+        return requests.get(f'{CASSETTE_ENDPOINT}/robots.txt')
 
     # Act
-    response = requests.get(f'{CASSETTE_ENDPOINT}/robots.txt')
+    response = get_ye_robots()
+
+    # Assert
     assert response.status_code == 200
-    # assert 0 == 1
     # TODO: Open and examine the generated YAML in the cassette.
+    assert 'TRON' in cassette.responses[0]['body']['string']
