@@ -14,6 +14,8 @@ from vcr.serializers import yamlserializer
 # To record, `export VCR_RECORD=True`
 VCR_RECORD = "VCR_RECORD" in os.environ
 
+# TODO: Split this file, and tests between functionality that is VCR only
+# and functionality that requires pytest
 
 class CleanYAMLSerializer:
 
