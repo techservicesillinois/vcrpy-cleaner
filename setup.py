@@ -47,12 +47,11 @@ setup(
     python_requires='>=3.7',
     install_requires=[
        'vcrpy',
-       'jwt',
+       'pyjwt',
     ],
     extras_require={
         'test': [
             'pytest',
-            'pyjwt',
             'requests',
         ],
     },
