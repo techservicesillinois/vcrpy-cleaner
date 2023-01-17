@@ -1,7 +1,7 @@
 See `def test_with_vcr` in `tests/test_vcr_cleaner.py` for usage.
 
 ```python
-from cleaners.jwt_token import clean_token
+from vcr_cleaner.cleaners.jwt_token import clean_token
 from vcr_cleaner import clean_if, CleanYAMLSerializer
 
 yaml_cleaner = CleanYAMLSerializer()

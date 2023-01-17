@@ -22,7 +22,7 @@ def version():
 
 
 setup(
-    name='vcrpy-cleaner',
+    name='vcr_cleaner',
     use_scm_version=version,
     setup_requires=['setuptools_scm'],
     description='Sensitive data cleaners for network cassettes captured'

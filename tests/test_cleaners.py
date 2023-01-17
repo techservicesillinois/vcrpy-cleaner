@@ -2,7 +2,7 @@ import datetime
 import gzip
 import jwt
 
-from cleaners.jwt_token import CLEANER_JWT_TOKEN, CLEANER_SALT, clean_token
+from vcr_cleaner.cleaners.jwt_token import CLEANER_JWT_TOKEN, CLEANER_SALT, clean_token
 
 
 def token_response(token: str):
