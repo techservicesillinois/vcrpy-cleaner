@@ -22,9 +22,7 @@ class CleanYAMLSerializer:
             @clean_if(uri=uri)
             def decorated(*args, **kwargs):
                 function(*args, **kwargs)
-            self.cleaners.append(decorated)
-        else:
-            self.cleaners.append(function)
+        self.cleaners.append(decorated if uri else function)
 
 
 def clean_if(uri):
