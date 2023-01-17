@@ -1,0 +1,13 @@
+# This workflow tests the code in a production-like environment on our internal dev machine.
+name: CI/CD
+
+on: [push, pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test
+      run: |
+        make test
