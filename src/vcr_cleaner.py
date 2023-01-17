@@ -17,11 +17,17 @@ class CleanYAMLSerializer:
     def deserialize(cassette: str):
         return yamlserializer.deserialize(cassette)
 
-    def register_cleaner(self, function):
-        self.cleaners.append(function)
+    def register_cleaner(self, function, uri=None):
+        if uri:
+            @clean_if(uri=uri)
+            def decorated(*args, **kwargs):
+                function(*args, **kwargs)
+            self.cleaners.append(decorated)
+        else:
+            self.cleaners.append(function)
 
 
-def cleaner(uri):
+def clean_if(uri):
     '''Decorates a cleaner method to make it apply on to the given URI'''
     def decorator(func):
         @functools.wraps(func)
