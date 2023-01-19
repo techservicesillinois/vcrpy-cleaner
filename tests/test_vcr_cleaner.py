@@ -6,8 +6,7 @@ from vcr_cleaner import clean_if, CleanYAMLSerializer
 
 def test_with_vcr():
     @clean_if(uri=f'helloworld.com/robots.txt')
-    def clean_robots(interaction: dict):
-        response = interaction['response']
+    def clean_robots(request: dict, response: dict):
         response['body']['string'] = \
             response['body']['string'].replace('User-agent', 'TRON')
 
@@ -23,10 +22,10 @@ def test_with_vcr():
     assert result == expected
 
 
-def test_regsiter_uri():
+def test_register_uri():
 
-    def undecorated_cleaner(interaction: dict):
-        interaction['response']['body']['string'] = 'TRON'
+    def undecorated_cleaner(request: dict, response: dict):
+        response['body']['string'] = 'TRON'
 
     serializer = CleanYAMLSerializer()
     serializer.register_cleaner(undecorated_cleaner,

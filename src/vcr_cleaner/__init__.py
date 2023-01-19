@@ -10,7 +10,7 @@ class CleanYAMLSerializer:
     def serialize(self, cassette: dict):
         for interaction in cassette['interactions']:
             for cleaner in self.cleaners:
-                cleaner(interaction)
+                cleaner(interaction['request'], interaction['response'])
         return yamlserializer.serialize(cassette)
 
     @staticmethod
@@ -26,12 +26,12 @@ class CleanYAMLSerializer:
 
 
 def clean_if(uri):
-    '''Decorates a cleaner method to make it apply on to the given URI'''
+    '''Decorates a cleaner method to make it apply only to the given URI'''
     def decorator(func):
         @functools.wraps(func)
-        def wrapper(interaction):
-            if interaction['request']['uri'] != uri:
+        def wrapper(request, response):
+            if request['uri'] != uri:
                 return
-            func(interaction)
+            func(request, response)
         return wrapper
     return decorator

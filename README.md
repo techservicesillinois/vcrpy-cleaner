@@ -8,8 +8,7 @@ yaml_cleaner = CleanYAMLSerializer()
 
 # Register a custom function
 @clean_if(uri='https://example.com/api/foulmouth')
-def clean_bad_word(interaction: dict):
-    response = interaction['response']
+def clean_bad_word(request: dict, response: dict):
     response['body']['string'] = response['body']['string'].replace('shid', '')
 
 yaml_cleaner.register_cleaner(clean_bad_word)
