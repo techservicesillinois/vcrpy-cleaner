@@ -2,10 +2,10 @@ import datetime
 import gzip
 import jwt
 
-from cleaners.jwt_token import CLEANER_JWT_TOKEN, CLEANER_SALT, clean_token
+from vcr_cleaner.cleaners.jwt_token import CLEANER_JWT_TOKEN, CLEANER_SALT, clean_token
 
 
-def token_response(raw_token: str):
+def token_response(token: str):
     '''Helper function to build VCR response dictionary'''
     return {
         'response': {
@@ -14,7 +14,7 @@ def token_response(raw_token: str):
             },
             'body': {
                 'string': gzip.compress(bytes(
-                jwt.encode(raw_token, CLEANER_SALT, algorithm='HS256') , "ascii"))
+                jwt.encode(token, CLEANER_SALT, algorithm='HS256') , "ascii"))
             }
         }
     }
@@ -26,4 +26,5 @@ def test_clean_token():
     token = token_response(target)
     clean_token(token)
     
-    assert token['response']['body']['string'] == token_response(expected)['response']['body']['string']
+    assert token['response']['body']['string'] == \
+        token_response(expected)['response']['body']['string']
