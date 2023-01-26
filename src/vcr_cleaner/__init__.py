@@ -1,6 +1,7 @@
 import functools
 
 from vcr.serializers import yamlserializer
+from typing import Callable
 
 class CleanYAMLSerializer:
 
@@ -17,7 +18,7 @@ class CleanYAMLSerializer:
     def deserialize(cassette: str):
         return yamlserializer.deserialize(cassette)
 
-    def register_cleaner(self, function, uri=None):
+    def register_cleaner(self, function: Callable, uri=None):
         if uri:
             @clean_if(uri=uri)
             def decorated(*args, **kwargs):
@@ -25,11 +26,11 @@ class CleanYAMLSerializer:
         self.cleaners.append(decorated if uri else function)
 
 
-def clean_if(uri):
+def clean_if(uri: str):
     '''Decorates a cleaner method to make it apply only to the given URI'''
-    def decorator(func):
+    def decorator(func: Callable):
         @functools.wraps(func)
-        def wrapper(request, response):
+        def wrapper(request: dict, response: dict):
             if request['uri'] != uri:
                 return
             func(request, response)
