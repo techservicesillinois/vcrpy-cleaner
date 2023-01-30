@@ -1,19 +1,24 @@
 .PHONY: all test clean
-VENV_PYTHON:=venv/bin/python
+VENV_PYTHON:=.test.venv/bin/python
+TENV_PYTHON:=.integration.venv/bin/python
 
 all: test
 
-venv: setup.py
-	rm -rf $@
-	python -m venv $@
-
-# Install package in develop mode
-.install: setup.py venv
-	$(VENV_PYTHON) -m pip install -e .[test]
+build:
+	python setup.py bdist
 	@touch $@
 
-test: .install
+.%.venv: setup.py
+	rm -rf $@
+	python -m venv $@
+	$@/bin/python -m pip install -e .[$*]
+	touch $@
+
+test: .test.venv
 	$(VENV_PYTHON) -m pytest
 
+integration: .integration.venv
+	$(TENV_PYTHON) -m mypy tests/integration/mypy_test.py
+
 clean:
-	rm -rf .install
+	rm -rf .install build dist .eggs

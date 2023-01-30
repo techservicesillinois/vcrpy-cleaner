@@ -44,6 +44,9 @@ setup(
     keywords='vcrpy cleaner sensitive data',
     packages=find_packages('src', exclude=['tests.*', 'tests']),
     package_dir={'': 'src'},
+    package_data={
+        "vcr_cleaner": ['py.typed'],
+    },
     python_requires='>=3.7',
     install_requires=[
        'vcrpy',
@@ -53,6 +56,9 @@ setup(
         'test': [
             'pytest',
             'requests',
+        ],
+        'integration': [
+            'mypy',
         ],
     },
     project_urls={
