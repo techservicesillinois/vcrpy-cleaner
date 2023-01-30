@@ -10,21 +10,16 @@ build:
 
 #TODO: Collapse 12 and 18 so make will not try to delete the venv, or add the venv to .PRECIOUS
 .%.venv: setup.py
-#	rm -rf $@
-#	python -m venv $@
+	rm -rf $@
+	python -m venv $@
+	$@/bin/python -m pip install -e .[$*]
 	touch $@
-	
-# Install package in develop mode
-.%.install: setup.py .%.venv
-#	.$*.venv/bin/python -m pip install -e .[$*]
-	@touch $@
 
-test: .test.install
+test: .test.venv
 	$(VENV_PYTHON) -m pytest
 
-integration: .integration.install
-#	$(TENV_PYTHON) -m mypy tests/integration/mypy_test.py
-	echo "Hello World"
+integration: .integration.venv
+	$(TENV_PYTHON) -m mypy tests/integration/mypy_test.py
 
 clean:
 	rm -rf .install build dist .eggs
