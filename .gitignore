@@ -24,11 +24,8 @@ pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
-.install
 *.egg
-MANIFEST
-.test_deps
-test_venv
+manifest
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -115,6 +112,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.*.venv
+.*.install
 
 # Spyder project settings
 .spyderproject

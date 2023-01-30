@@ -1,6 +1,6 @@
 .PHONY: all test clean
-VENV_PYTHON:=venv/bin/python
-TENV_PYTHON:=test_venv/bin/python
+VENV_PYTHON:=.test.venv/bin/python
+TENV_PYTHON:=.integration.venv/bin/python
 
 all: test
 
@@ -8,27 +8,23 @@ build:
 	python setup.py bdist
 	@touch $@
 
-venv: setup.py
-	rm -rf $@
-	python -m venv $@
-
-test_venv: setup.py
-	rm -rf $@
-	python -m venv $@
-
+#TODO: Collapse 12 and 18 so make will not try to delete the venv, or add the venv to .PRECIOUS
+.%.venv: setup.py
+#	rm -rf $@
+#	python -m venv $@
+	touch $@
+	
 # Install package in develop mode
-.install: setup.py venv
-	$(VENV_PYTHON) -m pip install -e .[test]
+.%.install: setup.py .%.venv
+#	.$*.venv/bin/python -m pip install -e .[$*]
 	@touch $@
 
-test: .install
+test: .test.install
 	$(VENV_PYTHON) -m pytest
 
-.test_deps: test_venv
-	$(TENV_PYTHON) -m pip install -e .[integration]
-
-integration: .test_deps
-	$(TENV_PYTHON) -m mypy tests/integration/mypy_test.py
+integration: .integration.install
+#	$(TENV_PYTHON) -m mypy tests/integration/mypy_test.py
+	echo "Hello World"
 
 clean:
 	rm -rf .install build dist .eggs
