@@ -25,7 +25,7 @@ test: .install
 	$(VENV_PYTHON) -m pytest
 
 .test_deps: test_venv
-	$(TENV_PYTHON) -m pip install -e . mypy vcrpy
+	$(TENV_PYTHON) -m pip install -e .[integration]
 
 integration: .test_deps
 	$(TENV_PYTHON) -m mypy tests/integration/mypy_test.py

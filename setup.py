@@ -57,6 +57,9 @@ setup(
             'pytest',
             'requests',
         ],
+        'integration': [
+            'mypy',
+        ],
     },
     project_urls={
         'Bug Reports':
