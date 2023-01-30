@@ -8,7 +8,6 @@ build:
 	python setup.py bdist
 	@touch $@
 
-#TODO: Collapse 12 and 18 so make will not try to delete the venv, or add the venv to .PRECIOUS
 .%.venv: setup.py
 	rm -rf $@
 	python -m venv $@
