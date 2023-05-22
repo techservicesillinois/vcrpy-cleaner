@@ -48,7 +48,9 @@ setup(
         "vcr_cleaner": ['py.typed'],
     },
     python_requires='>=3.7',
+    # TODO: Unpin urllib3 after https://github.com/kevin1024/vcrpy/issues/688
     install_requires=[
+       'urllib3==1.26.15', 
        'vcrpy',
        'pyjwt',
     ],
