@@ -20,6 +20,7 @@ def get_interaction(body):
     ('CLEAN ME and CLEAN THIS TOO', 'CLEANED and CLEANED'),
     ('NOTHING TO CLEAN', 'NOTHING TO CLEAN'),
     (b'DEADBEEF', b'DEADBEEF'),
+    (b'CLEAN ME', b'CLEAN ME'),
 ])
 def test_clean_env_string(monkeypatch, body, expected):
     monkeypatch.setenv('CLEAN_STRINGS', 'CLEAN ME,CLEAN THIS TOO')
