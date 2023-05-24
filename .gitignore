@@ -138,3 +138,4 @@ dmypy.json
 *.tgz
 *.vscode
 .requirements.venv
+.install
