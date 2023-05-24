@@ -29,3 +29,4 @@ def test_clean_env_string(monkeypatch, body, expected):
     result = interaction['response']['body']['string'] 
 
     assert result == expected
+    assert interaction == get_interaction(expected)
