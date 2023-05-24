@@ -27,13 +27,3 @@ def test_clean_token():
     
     expect = token_interaction(CLEANER_JWT_TOKEN)
     assert token == expect
-
-
-def test_clean_env_string():
-    '''
-    Test with a bytes token.
-    Test with a string content.
-    '''
-
-    
-
