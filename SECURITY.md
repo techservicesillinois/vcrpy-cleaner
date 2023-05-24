@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Patches for farmit will only be applied to the current release.
+Patches will only be applied to the current release.
 
 ## Reporting a Bug or Vulnerability
 
