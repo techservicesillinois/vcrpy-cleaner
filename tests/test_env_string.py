@@ -3,6 +3,7 @@ import pytest
 
 from vcr_cleaner.cleaners.env_strings import clean_env_strings
 
+ALWAYS_CLEAN= 'CLEAN ME,CLEAN THIS TOO'
 
 def get_body_string(body):
     return {
@@ -23,7 +24,7 @@ def get_body_string(body):
     (b'CLEAN ME', b'CLEAN ME'),
 ])
 def test_clean_env_string_key(monkeypatch, body, expected):
-    monkeypatch.setenv('CLEAN_STRINGS', 'CLEAN ME,CLEAN THIS TOO')
+    monkeypatch.setenv('CLEAN_STRINGS', ALWAYS_CLEAN)
 
     interaction = get_body_string(body)
     clean_env_strings(None, interaction['response'])
@@ -52,7 +53,7 @@ def get_body(body):
     (b'CLEAN ME', b'CLEAN ME'),
 ])
 def test_clean_env_string(monkeypatch, body, expected):
-    monkeypatch.setenv('CLEAN_STRINGS', 'CLEAN ME,CLEAN THIS TOO')
+    monkeypatch.setenv('CLEAN_STRINGS', ALWAYS_CLEAN)
 
     interaction = get_body(body)
     clean_env_strings(None, interaction['response'])
