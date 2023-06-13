@@ -7,6 +7,8 @@ def clean_env_strings(request: dict, response: dict):
     export CLEAN_STRINGS='my_name,my_email'
     '''
     clean_strings = os.environ.get('CLEAN_STRINGS', "").split(',')
+    if clean_strings == ['']:
+        return
 
     # Do not attempt to clean non-string body (i.e. binary auth token)
 
