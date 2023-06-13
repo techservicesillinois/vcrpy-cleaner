@@ -9,11 +9,23 @@ def clean_env_strings(request: dict, response: dict):
     clean_strings = os.environ.get('CLEAN_STRINGS', "").split(',')
 
     # Do not attempt to clean non-string body (i.e. binary auth token)
-    body = response['body']['string']
-    if not type(body) == str:
+
+    if not type(response['body']) == str and not type(response['body']) == dict:
         return
+
+    if 'string' in response['body']:
+        body = response['body']['string']
+    else:
+        body = response['body']
+
+    #if not type(body) == str:
+    #    return
 
     # Clean response body
     for clean_me in clean_strings:
         body = body.replace(clean_me, 'CLEANED')
-    response['body']['string'] = body
+
+    if 'string' in response['body']:
+        response['body']['string'] = body
+    else:
+        response['body'] = body
