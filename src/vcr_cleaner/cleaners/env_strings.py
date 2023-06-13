@@ -20,9 +20,6 @@ def clean_env_strings(request: dict, response: dict):
     else:
         body = response['body']
 
-    #if not type(body) == str:
-    #    return
-
     # Clean response body
     for clean_me in clean_strings:
         body = body.replace(clean_me, 'CLEANED')
