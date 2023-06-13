@@ -1,5 +1,4 @@
 import copy
-import requests
 
 from vcr_cleaner import clean_if, CleanYAMLSerializer
 
