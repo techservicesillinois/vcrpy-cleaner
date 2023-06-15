@@ -1,7 +1,13 @@
 import os
 
-
 def clean_env_strings(request: dict, response: dict):
+    if request:
+        clean_env_helper(request)
+    if response:
+        clean_env_helper(response)
+
+
+def clean_env_helper(dirty: dict):
     '''Clean any strings set in the CLEAN_STRING environment variable.
 
     export CLEAN_STRINGS='my_name,my_email'
@@ -11,13 +17,13 @@ def clean_env_strings(request: dict, response: dict):
         return
 
     # Only string body and a dict body with a key named 'string' are currently supported
-    if not type(response['body']) == str and not type(response['body']) == dict:
+    if not type(dirty['body']) == str and not type(dirty['body']) == dict:
         return
 
-    if 'string' in response['body']:
-        body = response['body']['string']
+    if 'string' in dirty['body']:
+        body = dirty['body']['string']
     else:
-        body = response['body']
+        body = dirty['body']
 
     # Do not attempt to clean non-string body (i.e. binary auth token)
     if not type(body) == str:
@@ -27,7 +33,7 @@ def clean_env_strings(request: dict, response: dict):
     for clean_me in clean_strings:
         body = body.replace(clean_me, 'CLEANED')
 
-    if 'string' in response['body']:
-        response['body']['string'] = body
+    if 'string' in dirty['body']:
+        dirty['body']['string'] = body
     else:
-        response['body'] = body
+        dirty['body'] = body
