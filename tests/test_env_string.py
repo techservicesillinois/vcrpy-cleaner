@@ -63,3 +63,18 @@ def test_clean_env_string(monkeypatch, body, expected):
     assert result == expected
     assert interaction == get_body(expected)
 
+
+@pytest.mark.parametrize('body,expected', [
+    ('CLEAN ME', 'CLEAN ME'),
+    ('CLEAN THIS TOO', 'CLEAN THIS TOO'),
+    (b'DEADBEEF', b'DEADBEEF'),
+    (b'CLEAN ME', b'CLEAN ME'),
+])
+def test_env_unset(monkeypatch, body, expected):
+    interaction = get_body(body)
+    clean_env_strings(None, interaction['response'])
+    result = interaction['response']['body']
+
+    assert result == expected
+    assert interaction == get_body(expected)
+

@@ -7,6 +7,8 @@ def clean_env_strings(request: dict, response: dict):
     export CLEAN_STRINGS='my_name,my_email'
     '''
     clean_strings = os.environ.get('CLEAN_STRINGS', "").split(',')
+    if clean_strings == ['']:
+        return
 
     # Only string body and a dict body with a key named 'string' are currently supported
     if not type(response['body']) == str and not type(response['body']) == dict:
