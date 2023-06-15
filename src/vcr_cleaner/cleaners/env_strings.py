@@ -10,8 +10,7 @@ def clean_env_strings(request: dict, response: dict):
     if clean_strings == ['']:
         return
 
-    # Do not attempt to clean non-string body (i.e. binary auth token)
-
+    # Only string body and a dict body with a key named 'string' are currently supported
     if not type(response['body']) == str and not type(response['body']) == dict:
         return
 
@@ -19,6 +18,10 @@ def clean_env_strings(request: dict, response: dict):
         body = response['body']['string']
     else:
         body = response['body']
+
+    # Do not attempt to clean non-string body (i.e. binary auth token)
+    if not type(body) == str:
+        return
 
     # Clean response body
     for clean_me in clean_strings:
