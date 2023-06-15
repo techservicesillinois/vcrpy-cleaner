@@ -15,6 +15,8 @@ def clean_env_strings(request: dict, response: dict):
 
     if 'string' in response['body']:
         body = response['body']['string']
+        if type(body) == bytes:
+            return
     else:
         body = response['body']
 
