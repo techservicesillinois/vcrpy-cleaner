@@ -20,6 +20,7 @@ def get_body_string(body):
     ('CLEAN THIS TOO', 'CLEANED'),
     ('CLEAN ME and CLEAN THIS TOO', 'CLEANED and CLEANED'),
     ('NOTHING TO CLEAN', 'NOTHING TO CLEAN'),
+    (b'DEADBEEF', b'DEADBEEF'),  # Regression for #20
 ])
 def test_clean_env_string_key(monkeypatch, body, expected):
     '''Test cases where there is a key named 'string' in 'body'.
