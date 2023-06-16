@@ -11,7 +11,12 @@ yaml_cleaner = CleanYAMLSerializer()
 def clean_bad_word(request: dict, response: dict):
     response['body']['string'] = response['body']['string'].replace('shid', '')
 
+@clean_if(uri='https://example.com/api/returns_so_so_many_records')
+def clean_long_response(request: dict, response: dict):
+    response['body'] = "{'when all your test needs':'is this bit'}"
+
 yaml_cleaner.register_cleaner(clean_bad_word)
+yaml_cleaner.register_cleaner(clean_long_response)
 
 # Register an included function
 yaml_cleaner.register_cleaner(clean_token, uri='https://example.com/api/auth')
