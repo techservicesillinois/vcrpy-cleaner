@@ -56,11 +56,11 @@ setup(
     ],
     extras_require={
         'test': [
+            'autopep8',
+            'flake8',
+            'mypy',
             'pytest',
             'requests',
-        ],
-        'integration': [
-            'mypy',
         ],
     },
     project_urls={

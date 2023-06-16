@@ -133,9 +133,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# TDXLIB
-*.ini
+# Packaging
 *.tgz
+
+# VSCode files
 *.vscode
+
+# Make targets
 .requirements.venv
 .install
+.lint
+.static

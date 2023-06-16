@@ -4,7 +4,7 @@ from vcr_cleaner import clean_if, CleanYAMLSerializer
 
 
 def test_with_vcr():
-    @clean_if(uri=f'helloworld.com/robots.txt')
+    @clean_if(uri='helloworld.com/robots.txt')
     def clean_robots(request: dict, response: dict):
         response['body']['string'] = \
             response['body']['string'].replace('User-agent', 'TRON')
@@ -28,7 +28,7 @@ def test_register_uri():
 
     serializer = CleanYAMLSerializer()
     serializer.register_cleaner(undecorated_cleaner,
-                                uri=f'helloworld.com/robots.txt')
+                                uri='helloworld.com/robots.txt')
 
     tape = {'interactions': [{
         'response': {'body': {"string": 'User-agent'}},
