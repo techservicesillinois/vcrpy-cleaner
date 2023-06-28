@@ -2,10 +2,14 @@ import datetime
 import gzip
 import jwt
 
-from vcr_cleaner.cleaners.jwt_token import CLEANER_JWT_TOKEN, CLEANER_SALT, clean_token
+from typing import Any
+from vcr_cleaner import JWTTokenInteraction
+from vcr_cleaner.cleaners.jwt_token import (
+    CLEANER_JWT_TOKEN, CLEANER_SALT, clean_token
+)
 
 
-def token_interaction(token: str):
+def token_interaction(token: dict[str, Any]) -> JWTTokenInteraction:
     '''Helper function to build VCR response dictionary'''
     return {
         'request': {},
@@ -14,8 +18,9 @@ def token_interaction(token: str):
                 'Content-Encoding': ['gzip'],
             },
             'body': {
-                'string': gzip.compress(bytes(
-                jwt.encode(token, CLEANER_SALT, algorithm='HS256') , "ascii"))
+                'string': gzip.compress(
+                    bytes(jwt.encode(token, CLEANER_SALT, algorithm='HS256'),
+                          "ascii"))
             }
         }
     }
@@ -24,6 +29,6 @@ def token_interaction(token: str):
 def test_clean_token():
     token = token_interaction({'exp': datetime.datetime(1970, 1, 1)})
     clean_token(token['request'], token['response'])
-    
+
     expect = token_interaction(CLEANER_JWT_TOKEN)
     assert token == expect

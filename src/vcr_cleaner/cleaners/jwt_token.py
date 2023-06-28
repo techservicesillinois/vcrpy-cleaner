@@ -2,6 +2,7 @@ import datetime
 import gzip
 import jwt
 
+
 CLEANER_SALT = 'salty'
 CLEANER_JWT_TOKEN = {'exp': datetime.datetime(2049, 6, 25)}
 

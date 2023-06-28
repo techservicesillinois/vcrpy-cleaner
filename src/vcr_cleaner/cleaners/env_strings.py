@@ -1,13 +1,38 @@
 import os
+from typing import overload
 
-def clean_env_strings(request: dict, response: dict):
+from vcr_cleaner import (
+    StringBodyResponse,
+    StringBodyRequest,
+    DictBodyResponse,
+    BytesBodyResponse,
+    Response,
+)
+
+
+def clean_env_strings(request: StringBodyRequest, response: Response):
     if request:
         clean_env_helper(request)
     if response:
         clean_env_helper(response)
 
 
-def clean_env_helper(dirty: dict):
+@overload
+def clean_env_helper(dirty: BytesBodyResponse) -> None:
+    ...
+
+
+@overload
+def clean_env_helper(dirty: StringBodyResponse) -> None:
+    ...
+
+
+@overload
+def clean_env_helper(dirty: DictBodyResponse) -> None:
+    ...
+
+
+def clean_env_helper(dirty):
     '''Clean any strings set in the CLEAN_STRING environment variable.
 
     export CLEAN_STRINGS='my_name,my_email'
@@ -16,7 +41,8 @@ def clean_env_helper(dirty: dict):
     if clean_strings == ['']:
         return
 
-    # Only string body and a dict body with a key named 'string' are currently supported
+    # Only string body and a dict body with a key named 'string'
+    # are currently supported
     if not type(dirty['body']) == str and not type(dirty['body']) == dict:
         return
 

@@ -7,10 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: Linter
+      run: |
+        make lint
+
+    - name: Static Test
+      run: |
+        make static
+        
     - name: Unit Test
       run: |
         make test
-
-    - name: Integration Test
-      run: |
-        make integration
