@@ -43,7 +43,7 @@ def clean_env_helper(dirty):
 
     # Only string body and a dict body with a key named 'string'
     # are currently supported
-    if not type(dirty['body']) == str and not type(dirty['body']) == dict:
+    if type(dirty['body']) is not str and type(dirty['body']) is not dict:
         return
 
     if 'string' in dirty['body']:
@@ -52,7 +52,7 @@ def clean_env_helper(dirty):
         body = dirty['body']
 
     # Do not attempt to clean non-string body (i.e. binary auth token)
-    if not type(body) == str:
+    if type(body) is not str:
         return
 
     # Clean response body
