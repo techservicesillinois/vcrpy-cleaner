@@ -57,9 +57,22 @@ def clean_env_helper(dirty):
 
     # Clean response body
     for clean_me in clean_strings:
-        body = body.replace(clean_me, 'CLEANED')
+        if clean_me.strip() != '':
+            body = body.replace(clean_me, 'CLEANED')
 
     if 'string' in dirty['body']:
         dirty['body']['string'] = body
     else:
         dirty['body'] = body
+
+
+def simple_clean_env_string(dirty):
+    '''Clean any strings set in the CLEAN_STRING environment variable.
+    export CLEAN_STRINGS='my_name,my_email'
+    '''
+    clean_strings = os.environ.get('CLEAN_STRINGS', "").split(',')
+    for clean_me in clean_strings:
+        if clean_me.strip() != '':
+            dirty = dirty.replace(clean_me, 'CLEANED')
+
+    return dirty
