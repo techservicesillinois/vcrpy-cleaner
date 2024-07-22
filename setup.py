@@ -27,8 +27,8 @@ setup(
     setup_requires=['setuptools_scm'],
     description='Sensitive data cleaners for network cassettes captured'
                 ' by the VCR.py testing library.',
-    #long_description=long_description,
-    #long_description_content_type='text/x-rst',
+    # long_description=long_description,
+    # long_description_content_type='text/x-rst',
     url='https://github.com/techservicesillinois/vcrpy-cleaner',
     author='Cybersecurity at the University of Illinois',
     author_email='securitysupport@illinois.edu',
@@ -50,7 +50,7 @@ setup(
     python_requires='>=3.7',
     # TODO: Unpin urllib3 after https://github.com/kevin1024/vcrpy/issues/688
     install_requires=[
-       'urllib3==1.26.15', 
+       'urllib3==1.26.19',
        'vcrpy',
        'pyjwt',
     ],
