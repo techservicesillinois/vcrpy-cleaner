@@ -133,6 +133,7 @@ def test_register_cleaner_if_path_endswith():
 
 
 def test_register_cleaner_if_path_endswith_negative():
+
     def clean_path(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
