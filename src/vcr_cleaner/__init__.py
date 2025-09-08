@@ -38,6 +38,7 @@ class CleanYAMLSerializer:
         'example.com' will match 'https://example.com/robots.txt'
         'example.com' will match 'https://example.com/api/v1/users'
         '''
+
         @_apply_if_uri_startswith(uri_starts=hostname)
         def decorated(*args, **kwargs):
             function(*args, **kwargs)
