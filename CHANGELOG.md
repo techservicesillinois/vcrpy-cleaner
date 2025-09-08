@@ -15,7 +15,11 @@ End-of-Life was decided upon based on these dependencies:
 
 ## [2.0.0]
 
-- Updated cleaner registration pattern
+### Added
+
+### Changed
+
+- Update cleaner registration pattern
 - Update naming conventions for clarity
 
 ## [1.0.0]
