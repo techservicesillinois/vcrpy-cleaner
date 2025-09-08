@@ -49,6 +49,7 @@ class CleanYAMLSerializer:
         Apply registered cleaner only if URI path after the first `/`
         matches the given text.
         '''
+
         @_apply_if_uri_endswith(uri_ends=path)
         def decorated(*args, **kwargs):
             function(*args, **kwargs)
