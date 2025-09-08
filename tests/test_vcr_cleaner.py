@@ -81,6 +81,7 @@ def test_register_cleaner_if_host_startswith():
 
 def test_register_cleaner_if_host_startswith_negative():
     """Cleaner should NOT apply if hostname does not match exactly."""
+
     def clean_host(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
