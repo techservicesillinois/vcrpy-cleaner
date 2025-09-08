@@ -72,6 +72,7 @@ def _apply_if_uri_contains(uri_contains: str):
 
     Typically applied by the matching `register_cleaner_if...` function above.
     '''
+
     def decorator(func: Callable):
         @functools.wraps(func)
         def wrapper(request: dict, response: dict):
