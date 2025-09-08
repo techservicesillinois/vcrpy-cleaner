@@ -59,6 +59,7 @@ class CleanYAMLSerializer:
         uri_contains: str
     ):
         '''Apply registered cleaner only if URI contains the given text.'''
+
         @_apply_if_uri_contains(uri_contains=uri_contains)
         def decorated(*args, **kwargs):
             function(*args, **kwargs)
