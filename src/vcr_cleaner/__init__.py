@@ -92,6 +92,7 @@ def _apply_if_uri_startswith(uri_starts: str):
     'example.com' will match 'example.com/robots.txt'
     'example.com' will match 'example.com/api/v1/users'
     '''
+
     def decorator(func: Callable):
         @functools.wraps(func)
         def wrapper(request: dict, response: dict):
