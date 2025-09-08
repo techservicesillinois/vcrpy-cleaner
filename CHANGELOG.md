@@ -22,6 +22,8 @@ End-of-Life was decided upon based on these dependencies:
 - Update cleaner registration pattern
 - Update naming conventions for clarity
 
+### Removed
+
 ## [1.0.0]
 
 ### Added
