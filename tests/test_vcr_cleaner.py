@@ -55,6 +55,7 @@ def test_register_uri():
 
 
 def test_register_cleaner_if_host_startswith():
+
     def clean_host(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
