@@ -115,6 +115,7 @@ def _apply_if_uri_endswith(uri_ends: str):
     'robots.txt' will match 'example.com/robots.txt'
     'api/v1/users' will match 'example.com/api/v1/users'
     '''
+
     def decorator(func: Callable):
         @functools.wraps(func)
         def wrapper(request: dict, response: dict):
