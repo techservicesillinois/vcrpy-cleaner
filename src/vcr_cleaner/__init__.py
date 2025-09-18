@@ -78,9 +78,8 @@ def _apply_if_uri_contains(uri_contains: str):
     def decorator(func: Callable):
         @functools.wraps(func)
         def wrapper(request: dict, response: dict):
-            if uri_contains not in request['uri']:
-                return
-            func(request, response)
+            if uri_contains in request['uri']:
+                func(request, response)
         return wrapper
     return decorator
 
