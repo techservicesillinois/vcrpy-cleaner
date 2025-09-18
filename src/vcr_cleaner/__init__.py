@@ -122,9 +122,8 @@ def _apply_if_uri_endswith(uri_ends: str):
     def decorator(func: Callable):
         @functools.wraps(func)
         def wrapper(request: dict, response: dict):
-            if not request['uri'].endswith(uri_ends):
-                return
-            func(request, response)
+            if request['uri'].endswith(uri_ends):
+                func(request, response)
         return wrapper
     return decorator
 
