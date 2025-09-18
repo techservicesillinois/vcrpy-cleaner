@@ -103,9 +103,8 @@ def _apply_if_uri_startswith(uri_starts: str):
                 .lstrip('https://')
                 .lstrip('http://')
             )
-            if not hostname.startswith(uri_starts):
-                return
-            func(request, response)
+            if hostname.startswith(uri_starts):
+                func(request, response)
         return wrapper
     return decorator
 
