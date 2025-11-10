@@ -1,10 +1,15 @@
 import copy
 
 from vcr_cleaner import CleanYAMLSerializer
+from vcr_cleaner.filters import (
+    if_uri_contains,
+    if_uri_endswith,
+    if_uri_startswith,
+)
 
 
-def test_with_vcr():
-
+def test_if_uri_contains_two_different_scrubs():
+    """ Test if two different filters conflict. """
     def clean_robots(request: dict, response: dict):
         response['body']['string'] = \
             response['body']['string'].replace('User-agent', 'CLEAN_ROBOT')
@@ -14,11 +19,11 @@ def test_with_vcr():
             response['body']['string'].replace('User-agent', 'CLEAN_MD')
 
     serializer = CleanYAMLSerializer()
-    serializer.register_cleaner_if_uri_contains(
-        clean_robots, uri_contains='/robots.txt'
+    serializer.register_cleaner(
+        if_uri_contains('/robots.txt', clean_robots)
     )
-    serializer.register_cleaner_if_uri_contains(
-        clean_all_md, uri_contains='.md'
+    serializer.register_cleaner(
+        if_uri_contains('.md', clean_all_md)
     )
     tape = {'interactions': [
         {'response': {'body': {"string": 'User-agent'}},
@@ -33,15 +38,14 @@ def test_with_vcr():
     assert result == expected
 
 
-def test_register_uri():
+def test_if_uri_contains_no_scrub():
 
-    def undecorated_cleaner(request: dict, response: dict):
+    def clean_body(request: dict, response: dict):
         response['body']['string'] = 'TRON'
 
     serializer = CleanYAMLSerializer()
-    serializer.register_cleaner_if_uri_contains(
-        undecorated_cleaner,
-        uri_contains='/robots.txt'
+    serializer.register_cleaner(
+        if_uri_contains('/robots.txt', clean_body)
     )
 
     tape = {'interactions': [{
@@ -54,15 +58,14 @@ def test_register_uri():
     assert result == expected
 
 
-def test_register_cleaner_if_host_startswith():
+def test_if_uri_startswith():
 
-    def clean_host(request: dict, response: dict):
+    def clean_body(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
     serializer = CleanYAMLSerializer()
-    serializer.register_cleaner_if_host_startswith(
-        clean_host,
-        hostname='example.com'
+    serializer.register_cleaner(
+        if_uri_startswith('example.com', clean_body)
     )
 
     tape = {'interactions': [
@@ -80,16 +83,15 @@ def test_register_cleaner_if_host_startswith():
     assert result == expected
 
 
-def test_register_cleaner_if_host_startswith_negative():
+def test_if_uri_startswith_negative():
     """Cleaner should NOT apply if hostname does not match exactly."""
 
-    def clean_host(request: dict, response: dict):
+    def clean_body(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
     serializer = CleanYAMLSerializer()
-    serializer.register_cleaner_if_host_startswith(
-        clean_host,
-        hostname='example.com'
+    serializer.register_cleaner(
+        if_uri_startswith('example.com', clean_body)
     )
 
     tape = {'interactions': [
@@ -107,14 +109,13 @@ def test_register_cleaner_if_host_startswith_negative():
     assert result == expected
 
 
-def test_register_cleaner_if_path_endswith():
-    def clean_path(request: dict, response: dict):
+def test_if_uri_endswith():
+    def clean_body(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
     serializer = CleanYAMLSerializer()
-    serializer.register_cleaner_if_path_endswith(
-        clean_path,
-        path='robots.txt'
+    serializer.register_cleaner(
+        if_uri_endswith('robots.txt', clean_body)
     )
 
     tape = {'interactions': [
@@ -132,15 +133,13 @@ def test_register_cleaner_if_path_endswith():
     assert result == expected
 
 
-def test_register_cleaner_if_path_endswith_negative():
-
-    def clean_path(request: dict, response: dict):
+def test_if_uri_endswith_negative():
+    def clean_body(request: dict, response: dict):
         response['body']['string'] = 'CLEANED'
 
     serializer = CleanYAMLSerializer()
-    serializer.register_cleaner_if_path_endswith(
-        clean_path,
-        path='robots.txt'
+    serializer.register_cleaner(
+        if_uri_endswith('robots.txt', clean_body)
     )
 
     tape = {'interactions': [

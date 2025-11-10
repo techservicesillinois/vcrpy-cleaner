@@ -3,13 +3,16 @@
 See `def test_with_vcr` in `tests/test_vcr_cleaner.py` for usage.
 
 ```python
-from vcr_cleaner.cleaners.jwt_token import clean_token
+import vcr
+
 from vcr_cleaner import CleanYAMLSerializer
+from vcr_cleaner.cleaners.jwt_token import clean_token
+from vcr_cleaner.filters import if_uri_contains
 
 yaml_cleaner = CleanYAMLSerializer()
 
 # Register an included function
-yaml_cleaner.register_cleaner_if_uri_contains(clean_token, '/api/auth')
+yaml_cleaner.register_cleaner(if_uri_contains('/api/auth', clean_token))
 
 # Define cleaner functions
 def clean_bad_word(request: dict, response: dict):
@@ -19,8 +22,9 @@ def clean_long_response(request: dict, response: dict):
     response['body'] = "{'when all your test needs':'is this bit'}"
 
 # Register custom cleaner functions
-yaml_cleaner.register_cleaner_if_uri_contains(clean_bad_word, '/api/foulmouth')
-yaml_cleaner.register_cleaner_if_uri_contains(clean_long_response, '/api/returns_so_so_many_records')
+yaml_cleaner.register_cleaner(if_uri_contains('/api/foulmouth', clean_bad_word))
+yaml_cleaner.register_cleaner(if_uri_contains('/api/returns_so_so_many_records',
+clean_long_response))
 
 my_vcr = vcr.VCR(
          cassette_library_dir='cassettes',
