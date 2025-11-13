@@ -1,6 +1,6 @@
 # VCR Cleaner
 
-See `def test_with_vcr` in `tests/test_vcr_cleaner.py` for usage.
+See `def test_if_uri_contains_two_different_scrubs` in `test_filters.py` for usage.
 
 ```python
 import vcr
