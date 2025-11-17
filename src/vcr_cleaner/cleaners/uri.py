@@ -22,7 +22,7 @@ def clean_uri(old: str, new: str):
     return clean_uri
 
 
-def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
+def _regex_sub_dict(message: dict, rule: str, replacement: str):
     '''Update the dictionary with rule matches replaced.'''
     cleaned = re.sub(rule, replacement, json.dumps(message))
 
@@ -32,13 +32,13 @@ def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
 
 
 def clean_domains(domain: str, replacement: str = 'cleaned.example.edu'):
-    '''Replace anything that looks like the given domain.'''
+    '''Replace anything that looks like the given domain and sub-domains.'''
     rule = f"/[^/]*{domain.replace('.', r'\.')}"
     rep = f"/{replacement}"
 
     def wrapper(request: dict, response: dict):
-        _clean_dict_hostnames(request, rule, rep)
-        _clean_dict_hostnames(response, rule, rep)
+        _regex_sub_dict(request, rule, rep)
+        _regex_sub_dict(response, rule, rep)
 
     wrapper.__doc__ = clean_domains.__doc__
 
