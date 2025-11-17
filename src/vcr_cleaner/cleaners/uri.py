@@ -1,3 +1,7 @@
+import json
+import re
+
+
 def clean_uri(old: str, new: str):
     """Returns a cleaner function that replaces the request URI
     string with all occurrences of substring old replaced by new.
@@ -20,7 +24,6 @@ def clean_uri(old: str, new: str):
 
 def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
     '''Update the dictionary with rule matches replaced.'''
-
     cleaned = re.sub(rule, replacement, json.dumps(message))
 
     # Update the original dict
@@ -30,7 +33,8 @@ def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
 
 def clean_domains(domain: str, replacement: str = 'cleaned.example.edu'):
     '''Replace anything that looks like the given domain.'''
-    # TODO: Add a unit test for this. - Confirm it can handle top level domain and sub-domain.
+    # TODO: Add a unit test for this.
+    # - Confirm it can handle top level domain and sub-domain.
 
     rule = f"/[^/]+{domain.replace('.', r'\.')}"
     rep = f"/{replacement}"
