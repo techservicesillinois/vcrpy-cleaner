@@ -16,3 +16,29 @@ def clean_uri(old: str, new: str):
     clean_uri.__doc__ = f"Replaces the request URI string with all " \
         f"occurrences of substring '{old}' replaced by '{new}'."
     return clean_uri
+
+
+def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
+    '''Update the dictionary with rule matches replaced.'''
+
+    cleaned = re.sub(rule, replacement, json.dumps(message))
+
+    # Update the original dict
+    message.clear()
+    message.update(json.loads(cleaned))
+
+
+def clean_domains(domain: str, replacement: str='cleaned.example.edu'):
+    '''Replace anything that looks like the given domain.'''
+
+    rule = f"/[^/]+{ domain.replace('.', '\.') }"
+    rep = f"/{ replacement }"
+
+    def wrapper(request: dict, response: dict):
+         _clean_dict_hostnames(request, rule, rep)
+         _clean_dict_hostnames(response, rule, rep)
+
+    wrapper.__doc__ = clean_domains.__doc__
+
+    return wrapper
+
