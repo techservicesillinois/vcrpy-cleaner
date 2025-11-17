@@ -30,6 +30,7 @@ def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
 
 def clean_domains(domain: str, replacement: str='cleaned.example.edu'):
     '''Replace anything that looks like the given domain.'''
+    # TODO: Add a unit test for this. - Confirm it can handle top level domain and sub-domain.
 
     rule = f"/[^/]+{ domain.replace('.', '\.') }"
     rep = f"/{ replacement }"
