@@ -28,18 +28,17 @@ def _clean_dict_hostnames(message: dict, rule: str, replacement: str):
     message.update(json.loads(cleaned))
 
 
-def clean_domains(domain: str, replacement: str='cleaned.example.edu'):
+def clean_domains(domain: str, replacement: str = 'cleaned.example.edu'):
     '''Replace anything that looks like the given domain.'''
     # TODO: Add a unit test for this. - Confirm it can handle top level domain and sub-domain.
 
-    rule = f"/[^/]+{ domain.replace('.', '\.') }"
-    rep = f"/{ replacement }"
+    rule = f"/[^/]+{domain.replace('.', '\.')}"
+    rep = f"/{replacement}"
 
     def wrapper(request: dict, response: dict):
-         _clean_dict_hostnames(request, rule, rep)
-         _clean_dict_hostnames(response, rule, rep)
+        _clean_dict_hostnames(request, rule, rep)
+        _clean_dict_hostnames(response, rule, rep)
 
     wrapper.__doc__ = clean_domains.__doc__
 
     return wrapper
-
