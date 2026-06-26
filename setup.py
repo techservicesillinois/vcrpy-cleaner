@@ -36,10 +36,10 @@ setup(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
     ],
     keywords='vcrpy cleaner sensitive data',
     packages=find_packages('src', exclude=['tests.*', 'tests']),
@@ -47,10 +47,10 @@ setup(
     package_data={
         "vcr_cleaner": ['py.typed'],
     },
-    python_requires='>=3.7',
+    python_requires='>=3.11',
     # TODO: Unpin urllib3 after https://github.com/kevin1024/vcrpy/issues/688
     install_requires=[
-       'urllib3==1.26.19',
+       'urllib3',
        'vcrpy',
        'pyjwt',
     ],
