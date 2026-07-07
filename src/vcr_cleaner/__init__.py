@@ -67,7 +67,7 @@ class JWTTokenResponse(TypedDict):
     '''MyPy type for a web response whose body is a dictionary
       containing a JWT token.'''
     headers: dict[str, List[str]]
-    body: dict[str, bytes]
+    body: Any
 
 
 class JWTTokenInteraction(TypedDict):
