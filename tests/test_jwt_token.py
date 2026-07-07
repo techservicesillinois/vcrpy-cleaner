@@ -1,5 +1,4 @@
 import datetime
-import gzip
 import jwt
 
 from typing import Any
@@ -18,9 +17,7 @@ def token_interaction(token: dict[str, Any]) -> JWTTokenInteraction:
                 'Content-Encoding': ['gzip'],
             },
             'body': {
-                'string': gzip.compress(
-                    bytes(jwt.encode(token, CLEANER_SALT, algorithm='HS256'),
-                          "ascii"))
+                'string': jwt.encode(token, CLEANER_SALT, algorithm='HS256')
             }
         }
     }
